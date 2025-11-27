@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KarteikartApp</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <a href="index.html" class="add-card-link">Zurück zur Startseite</a>
@@ -16,5 +17,16 @@
     <p></p>
     <h4>Version: v1.0.0</h4>
     <p> - Neue Kategorie: Konjungtionen und deren Adverbialsatzarten</p>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').then(registration => {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
 </body>
 </html>

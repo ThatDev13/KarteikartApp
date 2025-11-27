@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KarteikartApp</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <div class="top-right-button"><a href="hilfe.html" class="button">Hilfe</a></div>
@@ -22,5 +23,16 @@
     <a href="infos.html" class="add-card-link">Weitere Infos</a>
     <p></p>
     <p>No © 2025 Appic Applications, Keine Rechte voreinbehalten</p>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').then(registration => {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
 </body>
 </html>
