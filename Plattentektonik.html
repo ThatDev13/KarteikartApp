@@ -3,33 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KarteikartApp</title>
+    <title>Plattentektonik </title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
-    <a href="index.html" class="add-card-link">Zurück zur Startseite</a>
-    <h1>Patchnotes</h1>
-    <p></p>
-    <h4>Version 1.0.4</h4>
-    <p></p>
-    <p> - Neuer Aufbau</p>
-    <p> - Neues Fach: Gesselschaft und Politik (GuP)</p>
-    <p> - Neues Thema: Plattentektonik</p>
-    <p></p>
-    <h4>Version 1.0.3</h4>
-    <p> - Neue Funktion: Fremdsprachen</p>
-    <p></p>
-    <h4>Version 1.0.2</h4>
-    <p> - Neue Kategorie: Terme & Variabeln</p>
-    <p></p>
-    <h4>Version 1.0.1</h4>
-    <p> - Neue Hilfe Sektion</p>
-    <p> - Kleine Bug Fixes</p>
-    <p></p>
-    <h4>Version 1.0.0</h4>
-    <p> - Launch</p>
-    <p> - Neue Kategorie: Konjungtionen und deren Adverbialsatzarten</p>
+    <h1>Karteikarten: Plattentektonik</h1>
+    <div class="card-container">
+        <div class="card">
+            <div class="card-front">
+                <p>Frage</p>
+            </div>
+            <div class="card-back">
+                <p>Antwort</p>
+            </div>
+        </div>
+    </div>
+    <div class="navigation">
+        <button id="prev-btn">Vorherige</button>
+        <button id="flip-btn">Umdrehen</button>
+        <button id="next-btn">Nächste</button>
+    </div>
+    <a href="index.html" class="add-card-link">Zurück zu den Kategorien</a>
+    <script src="Plattentektonik.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
