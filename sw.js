@@ -3,15 +3,25 @@ const urlsToCache = [
   '.',
   'index.html',
   'style.css',
-  'Konjungtionen.html',
-  'Konjungtionen.js',
+  'manifest.json',
   'Logo.jpg',
+  'deutsch.html',
+  'fremdsprache.html',
+  'gup.html',
   'hilfe.html',
   'infos.html',
+  'Konjungtionen.html',
+  'Konjungtionen.js',
+  'mathe.html',
   'new.html',
   'patchnotes.html',
-  'offline.html',
-  'offline.js'
+  'Plattentektonik.html',
+  'Plattentektonik.js',
+  'terme.html',
+  'terme.js',
+  'Spanisch/spanisch-zahlen.html',
+  'Spanisch/spanisch-zahlen.js',
+  'offline.html'
 ];
 
 self.addEventListener('install', event => {
