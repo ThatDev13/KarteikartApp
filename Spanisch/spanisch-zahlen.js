@@ -43,6 +43,8 @@ function flipCard() {
 function nextCard() {
     currentCard = (currentCard + 1) % cards.length;
     showCard();
+    const card = document.querySelector('.card');
+    card.classList.remove('flipped');
 }
 
 function prevCard() {
