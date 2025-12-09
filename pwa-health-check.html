@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Health Check</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .check {
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .check.pass {
+            background: #d4edda;
+            color: #155724;
+        }
+        .check.fail {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .check.warn {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .icon {
+            font-size: 20px;
+            margin-right: 10px;
+            min-width: 30px;
+        }
+        h1 {
+            color: #333;
+        }
+        .summary {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+            border-left: 5px solid #007bff;
+        }
+        code {
+            background: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 PWA Health Check</h1>
+    <p>Diese Seite prüft, ob die KarteikartApp installierbar ist.</p>
+
+    <div id="checks"></div>
+
+    <div class="summary">
+        <h2>Was kommt als nächstes?</h2>
+        <p id="nextSteps"></p>
+    </div>
+
+    <script>
+        const checks = [];
+        const MANIFEST_URL = './manifest.json';
+        const SW_URL = './service-worker.js';
+
+        function addCheck(name, pass, message) {
+            checks.push({ name, pass, message });
+        }
+
+        function render() {
+            const html = checks.map(c => `
+                <div class="check ${c.pass ? 'pass' : 'fail'}">
+                    <span class="icon">${c.pass ? '✅' : '❌'}</span>
+                    <span><strong>${c.name}</strong><br/>${c.message}</span>
+                </div>
+            `).join('');
+            
+            document.getElementById('checks').innerHTML = html;
+            
+            const passCount = checks.filter(c => c.pass).length;
+            const failCount = checks.filter(c => !c.pass).length;
+            
+            let nextSteps = '';
+            if (failCount === 0) {
+                nextSteps = `<strong>✨ PWA ist bereit zum Installieren!</strong><br/>
+                    Versuche auf deinem Pixel zu öffnen und tippe auf das "Installieren"-Banner, 
+                    oder gehe zu Chrome-Menü → "App installieren".`;
+            } else {
+                nextSteps = `<strong>⚠️ ${failCount} Problem(e) erkannt:</strong><br/>
+                    Überprüfe die fehlgeschlagenen Checks oben. Kontaktiere den Entwickler, wenn das Problem bestehen bleibt.`;
+            }
+            
+            document.getElementById('nextSteps').innerHTML = nextSteps;
+        }
+
+        async function checkManifest() {
+            try {
+                const response = await fetch(MANIFEST_URL);
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    addCheck('Manifest erreichbar', true, `HTTP ${response.status}`);
+                    
+                    // Check required properties
+                    const requiredProps = ['name', 'short_name', 'start_url', 'display', 'icons'];
+                    const missing = requiredProps.filter(prop => !data[prop]);
+                    
+                    if (missing.length === 0) {
+                        addCheck('Manifest Properties', true, 'Alle erforderlichen Eigenschaften vorhanden');
+                    } else {
+                        addCheck('Manifest Properties', false, `Fehlend: ${missing.join(', ')}`);
+                    }
+
+                    // Check icons
+                    if (Array.isArray(data.icons) && data.icons.length > 0) {
+                        addCheck('Icons definiert', true, `${data.icons.length} Icon(s) gefunden`);
+                        
+                        const hasMaskable = data.icons.some(i => i.purpose === 'maskable');
+                        addCheck('Maskable Icon (Android)', hasMaskable, 
+                            hasMaskable ? 'Vorhanden' : 'Empfohlen aber nicht kritisch');
+                    } else {
+                        addCheck('Icons definiert', false, 'Keine Icons gefunden');
+                    }
+
+                    // Check display mode
+                    addCheck('Display Mode', data.display === 'standalone', 
+                        `Mode: "${data.display}" ${data.display === 'standalone' ? '✓' : '✗'}`);
+                    
+                    addCheck('Start URL', true, `"${data.start_url}"`);
+                } else {
+                    addCheck('Manifest erreichbar', false, `HTTP ${response.status}`);
+                }
+            } catch (err) {
+                addCheck('Manifest erreichbar', false, `Fehler: ${err.message}`);
+            }
+        }
+
+        async function checkServiceWorker() {
+            try {
+                const response = await fetch(SW_URL);
+                if (response.ok) {
+                    addCheck('Service Worker erreichbar', true, `HTTP ${response.status}`);
+                    
+                    const code = await response.text();
+                    if (code.includes('addEventListener')) {
+                        addCheck('Service Worker Logik', true, 'Event Listener gefunden');
+                    }
+                } else {
+                    addCheck('Service Worker erreichbar', false, `HTTP ${response.status}`);
+                }
+            } catch (err) {
+                addCheck('Service Worker erreichbar', false, `Fehler: ${err.message}`);
+            }
+        }
+
+        async function checkBrowserCapability() {
+            const capabilities = [];
+            
+            if ('serviceWorker' in navigator) {
+                capabilities.push('Service Worker');
+            }
+            if ('caches' in window) {
+                capabilities.push('Cache API');
+            }
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                capabilities.push('Standalone Mode');
+            }
+            
+            if (capabilities.length > 0) {
+                addCheck('Browser-Features', true, `${capabilities.join(', ')}`);
+            } else {
+                addCheck('Browser-Features', false, 'Einige PWA-Features nicht verfügbar');
+            }
+            
+            // Check HTTPS / Localhost
+            const isSecure = location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+            addCheck('HTTPS/Localhost', isSecure, 
+                isSecure ? 'Sicher' : 'Warnung: HTTPS empfohlen für PWA-Features');
+        }
+
+        async function runChecks() {
+            await checkManifest();
+            await checkServiceWorker();
+            checkBrowserCapability();
+            render();
+        }
+
+        document.addEventListener('DOMContentLoaded', runChecks);
+    </script>
+</body>
+</html>

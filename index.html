@@ -2,11 +2,18 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>KarteikartApp</title>
+    <meta name="description" content="Lerne mit digitalen Karteikarten">
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Karteikart">
+    <link rel="apple-touch-icon" href="192x192.jpg">
+    <link rel="icon" type="image/x-icon" href="192x192.jpg">
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#000000">
 </head>
 <body>
     <div class="top-right-button"><a href="hilfe.html" class="button">Hilfe</a></div>
@@ -40,15 +47,58 @@
         <button id="installButton" style="background-color: #007bff; color: white; border: none; padding: 8px 15px; cursor: pointer; border-radius: 5px;">Installieren</button>
     </div>
     <script>
+        let deferredPrompt;
+        
+        // Service Worker registrieren
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('service-worker.js').then(registration => {
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                }, err => {
-                    console.log('ServiceWorker registration failed: ', err);
-                });
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful:', registration.scope);
+                    })
+                    .catch(err => {
+                        console.error('ServiceWorker registration failed:', err);
+                    });
             });
         }
+        
+        // beforeinstallprompt Event abfangen
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            const installBanner = document.getElementById('installBanner');
+            if (installBanner) {
+                installBanner.style.display = 'block';
+            }
+            console.log('Install prompt available');
+        });
+        
+        // Install Button Handler
+        const installButton = document.getElementById('installButton');
+        if (installButton) {
+            installButton.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    console.log('User choice:', outcome);
+                    deferredPrompt = null;
+                    const installBanner = document.getElementById('installBanner');
+                    if (installBanner) {
+                        installBanner.style.display = 'none';
+                    }
+                }
+            });
+        }
+        
+        // App installiert Event
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA wurde installiert');
+            deferredPrompt = null;
+            const installBanner = document.getElementById('installBanner');
+            if (installBanner) {
+                installBanner.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
