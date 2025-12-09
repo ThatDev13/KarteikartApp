@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KarteikartApp</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="https://progressier.app/kkSzOi7FYgOQ1f7huyId/progressier.json"/>
-    <script defer src="https://progressier.app/kkSzOi7FYgOQ1f7huyId/script.js"></script> 
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <div class="top-right-button"><a href="hilfe.html" class="button">Hilfe</a></div>
@@ -35,10 +34,14 @@
     <a href="infos.html" class="add-card-link">Weitere Infos</a>
     <p></p>
     <p>No © 2025 Appic Applications, Keine Rechte voreinbehalten</p>
+    <div id="installBanner" style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background-color: #333; color: white; text-align: center; padding: 10px;">
+        <p>Installiere die KarteikartApp für eine bessere Erfahrung!</p>
+        <button id="installButton" style="background-color: #007bff; color: white; border: none; padding: 8px 15px; cursor: pointer; border-radius: 5px;">Installieren</button>
+    </div>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js').then(registration => {
+                navigator.serviceWorker.register('/service-worker.js').then(registration => {
                     console.log('ServiceWorker registration successful with scope: ', registration.scope);
                 }, err => {
                     console.log('ServiceWorker registration failed: ', err);
