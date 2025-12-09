@@ -1,9 +1,0 @@
-{
-  "name": "KarteikartApp",
-  "short_name": "KarteikartApp",
-  "theme_color": "#16212a",
-  "background_color": "#ffffff",
-  "display": "fullscreen",
-  "scope": "/",
-  "start_url": "/"
-}
