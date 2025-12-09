@@ -1,6 +1,6 @@
 {
   "name": "KarteikartApp",
-  "short_name": "Karteikart",
+  "short_name": "KarteikartApp",
   "description": "Lerne mit digitalen Karteikarten",
   "start_url": "./",
   "scope": "./",
