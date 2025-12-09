@@ -6,6 +6,7 @@
     <title>KarteikartApp</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
 </head>
 <body>
     <div class="top-right-button"><a href="hilfe.html" class="button">Hilfe</a></div>
@@ -41,7 +42,7 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js').then(registration => {
+                navigator.serviceWorker.register('service-worker.js').then(registration => {
                     console.log('ServiceWorker registration successful with scope: ', registration.scope);
                 }, err => {
                     console.log('ServiceWorker registration failed: ', err);
