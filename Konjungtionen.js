@@ -1,5 +1,5 @@
 const cards = [
-    { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "sodass"?', answer: 'Konsekutivsatz'},
+    { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "so"?', answer: 'Konsekutivsatz'},
     { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "bevor"?', answer: 'Temporalsatz' },
     { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "welche"?', answer: 'Relativsatz' },
     { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "weil"?', answer: 'Kausalsatz'},
@@ -10,14 +10,12 @@ const cards = [
     { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "wenn"?', answer: 'Konditionalsatz'},
     { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "als"?', answer: 'Temporalsatz'},
     { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "um zu"?', answer: 'Finalsatz'},
-    { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "das"?', answer: 'Finalsatz, Relativsatz'},
+    { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "das"?', answer: 'Finalsatz'},
     { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "während"?', answer: 'Temporal'},
     { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "seit"?', answer: 'Temporalsatz'},
-    { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "der"?', answer: 'Relativsatz'},
-    { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "die"?', answer: 'Relativsatz'},
-    { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "dem"?', answer: 'Relativsatz'},
-    { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "dem"?', answer: 'Relativsatz'},
-    { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "welcher"?', answer: 'Relativsatz'},
+    { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "dass"?', answer: 'Konsekutivsatz'},
+    { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "obwohl"?', answer: 'Konzessivsatz'},
+    { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "trotz"?', answer: 'Konzessivsatz'},
 ];
 
 let currentCard = 0;
