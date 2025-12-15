@@ -23,7 +23,22 @@
         <button id="flip-btn">Umdrehen</button>
         <button id="next-btn">Nächste</button>
     </div>
+    <button popovertarget="Hilfe">💡 - Hilfe</button>
+        <div id="Hilfe" popover class="popover">
+            <h2>Hilfe</h2>
+            <p></p>
+            <p>Kausalsatz: Warum?</p>
+            <p>Modalsatz: Wie?</p>
+            <p>Temporalsatz: Wann?</p>
+            <p>Finalsatz: Mit welcher Absicht?</p>
+            <p>Konditionalsatz: Mit welcher Bedingung?</p>
+            <p>Konzessivsatz: Trotz welcher Gegengründe?</p>
+            <p>Konsektuivsatz: Mit welcher Folge/Wirkung?</p>
+            <button popovertarget="Hilfe" popovertargetaction="hide">Schließen</button>
+        </div>
+    <p></p>
     <a href="index.html" class="add-card-link">Zurück zu den Kategorien</a>
+
     <script src="Konjungtionen.js"></script>
     <script>
         if ('serviceWorker' in navigator) {

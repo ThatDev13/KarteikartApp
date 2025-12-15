@@ -1,7 +1,6 @@
 const cards = [
     { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "so"?', answer: 'Konsekutivsatz'},
     { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "bevor"?', answer: 'Temporalsatz' },
-    { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "welche"?', answer: 'Relativsatz' },
     { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "weil"?', answer: 'Kausalsatz'},
     { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "falls"?', answer: 'Konditionalsatz'},
     { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "damit"?', answer: 'Finalsatz'},
@@ -17,6 +16,8 @@ const cards = [
     { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "obwohl"?', answer: 'Konzessivsatz'},
     { question: 'Zu welchem Adverbialsatz gehört die Konjunktion "trotz"?', answer: 'Konzessivsatz'},
 ];
+
+
 
 let currentCard = 0;
 
