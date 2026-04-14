@@ -1,4 +1,4 @@
-const CACHE_NAME = "karteikartapp-v2";
+const CACHE_NAME = "karteikartapp-v3";
 const ASSETS = [
   "./",
   "./index.html",

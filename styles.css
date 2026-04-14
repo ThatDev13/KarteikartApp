@@ -209,6 +209,9 @@ button {
 input[type="text"],
 input[type="password"],
 input[type="number"] {
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
   border: 1px solid var(--line);
   background: #fff;
   border-radius: 14px;

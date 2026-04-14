@@ -17,8 +17,23 @@ function init() {
     return;
   }
 
+  ensureAiInputsEditable();
   wireForm();
   wireImportExport();
+}
+
+function ensureAiInputsEditable() {
+  const topicInput = document.getElementById("topic");
+  const gradeInput = document.getElementById("grade");
+  const countInput = document.getElementById("count");
+
+  [topicInput, gradeInput, countInput].forEach((input) => {
+    if (!input) return;
+    input.disabled = false;
+    input.readOnly = false;
+    input.removeAttribute("disabled");
+    input.removeAttribute("readonly");
+  });
 }
 
 function wireForm() {
