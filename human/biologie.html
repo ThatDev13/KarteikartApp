@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Biologie | KarteikartApp</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <main class="study-shell">
+      <div class="study-topbar">
+        <a class="topic-btn" href="../index.html">Zurueck</a>
+        <span class="badge">Biologie</span>
+      </div>
+
+      <section class="glass study-card">
+        <p id="progress" class="helper"></p>
+        <h2 id="question"></h2>
+        <p id="answer" class="answer"></p>
+        <p id="hint" class="helper"></p>
+
+        <div class="study-actions">
+          <button id="reveal" class="primary">Antwort zeigen</button>
+          <button id="prev">Vorherige</button>
+          <button id="next">Naechste</button>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // Diese Karten koennen direkt in dieser HTML-Datei gepflegt werden.
+      window.TOPIC_CARDS = [
+        { question: "Was ist Photosynthese?", answer: "Umwandlung von Licht, Wasser und CO2 in Glukose und Sauerstoff." },
+        { question: "Wie heisst das Kraftwerk der Zelle?", answer: "Mitochondrium" },
+        { question: "Welche Aufgabe hat das Blut?", answer: "Transport von Sauerstoff, Naehrstoffen und Abfallstoffen." },
+        { question: "Nenne den groessten Teil des menschlichen Gehirns.", answer: "Grosshirn" },
+        { question: "Was brauchen Pflanzen fuer die Keimung mindestens?", answer: "Wasser, passende Temperatur und Sauerstoff." },
+      ];
+    </script>
+    <script src="../pwa.js"></script>
+    <script src="shared-study.js"></script>
+  </body>
+</html>

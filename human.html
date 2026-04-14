@@ -4,11 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f2f4f7" />
-    <meta name="description" content="Karteikarten-App mit menschlich erstellten und KI-generierten Karten." />
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="icon" href="192x192.jpg" />
     <link rel="stylesheet" href="styles.css" />
-    <title>KarteikartApp</title>
+    <title>Von Mensch gebaut | KarteikartApp</title>
   </head>
   <body>
     <div class="bg-shape bg-shape-a" aria-hidden="true"></div>
@@ -17,21 +16,21 @@
     <main class="app-shell">
       <header class="app-header">
         <p class="kicker">KarteikartApp</p>
-        <h1>Lernen wie mit Karteikarten</h1>
-        <p class="subtitle">Waehle deinen Lernmodus.</p>
+        <h1>Von Mensch gebaut</h1>
+        <p class="subtitle">Jedes Thema ist eine eigene HTML-Datei mit Karten im JavaScript.</p>
       </header>
 
-      <section class="home-choice-grid" aria-label="Lernmodus Auswahl">
-        <a class="home-choice home-choice-human" href="human.html">
-          <h2>Von Mensch gebaut</h2>
-          <p>Eigene Themen aus dem Dateisystem.</p>
-        </a>
-        <a class="home-choice home-choice-ai" href="ai.html">
-          <h2>KI generiert</h2>
-          <p>Karten automatisch mit KI erstellen.</p>
-        </a>
+      <div class="study-topbar">
+        <a class="topic-btn" href="index.html">Zurueck zur Home</a>
+      </div>
+
+      <section class="topic-grid">
+        <a class="topic-btn" href="human/mathe.html">Mathematik</a>
+        <a class="topic-btn" href="human/biologie.html">Biologie</a>
+        <a class="topic-btn" href="human/geschichte.html">Geschichte</a>
       </section>
     </main>
+
     <script src="pwa.js"></script>
   </body>
 </html>
