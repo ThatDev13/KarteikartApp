@@ -1,106 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>KarteikartApp</title>
-    <meta name="description" content="Lerne mit digitalen Karteikarten">
-    <meta name="theme-color" content="#000000">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Karteikart">
-    <link rel="apple-touch-icon" href="192x192.jpg">
-    <link rel="icon" type="image/x-icon" href="192x192.jpg">
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
-</head>
-<body>
-    <script src="https://kit.fontawesome.com/fb8f46f149.js" crossorigin="anonymous"></script>
-    <p></p>
-    <div class="top-right-button"><a href="hilfe.html" class="button">Hilfe</a></div>
-    <p></p>
-    <h1>KarteikartApp</h1>
-    <h2>Willkommen Zurück! 👋🏼</h2>
-    <h3>Bitte wähle ein Fach:</h3>
-    <a href="deutsch.html" class="fach-card">Deutsch</a>
-    <p></p>
-    <a href="mathe.html" class="fach-card">Mathe</a>
-    <p></p>
-    <a href="gup.html" class="fach-card">GuP</a>
-    <p></p>
-    <a href="fremdsprache.html" class="fach-card">Fremdsprachen</a>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <h4>Aktuelle Version: v1.0.5</h4>
-    <h4>Du willst wissen Was neu ist? Sehe dir die Patchnotes an!</h4>
-    <p></p>
-    <a href="news.html" class="add-card-link">Aktuelle Neuigkeiten</a>
-    <p></p>
-    <a href="patchnotes.html" class="add-card-link">Patchnotes Öffnen</a>
-    <p></p>
-    <a href="infos.html" class="add-card-link">Weitere Infos</a>
-    <p></p>
-    <p>No © 2025 Appic Applications, Keine Rechte voreinbehalten</p>
-    <div id="installBanner" style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background-color: #333; color: white; text-align: center; padding: 10px;">
-        <p>Installiere die KarteikartApp für eine bessere Erfahrung!</p>
-        <button id="installButton" style="background-color: #007bff; color: white; border: none; padding: 8px 15px; cursor: pointer; border-radius: 5px;">Installieren</button>
-    </div>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#111827" />
+    <meta name="description" content="KarteikartApp - Lernen mit KI-generierten Karteikarten" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="KarteikartApp" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <title>KarteikartApp - Intelligentes Lernen</title>
+  </head>
+  <body class="dark bg-dark-950 text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
     <script>
-        let deferredPrompt;
-        
-        // Service Worker registrieren
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('service-worker.js')
-                    .then(registration => {
-                        console.log('ServiceWorker registration successful:', registration.scope);
-                    })
-                    .catch(err => {
-                        console.error('ServiceWorker registration failed:', err);
-                    });
-            });
-        }
-        
-        // beforeinstallprompt Event abfangen
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            const installBanner = document.getElementById('installBanner');
-            if (installBanner) {
-                installBanner.style.display = 'block';
-            }
-            console.log('Install prompt available');
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(() => {
+          // Service Worker Registration failed
         });
-        
-        // Install Button Handler
-        const installButton = document.getElementById('installButton');
-        if (installButton) {
-            installButton.addEventListener('click', async () => {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    const { outcome } = await deferredPrompt.userChoice;
-                    console.log('User choice:', outcome);
-                    deferredPrompt = null;
-                    const installBanner = document.getElementById('installBanner');
-                    if (installBanner) {
-                        installBanner.style.display = 'none';
-                    }
-                }
-            });
-        }
-        
-        // App installiert Event
-        window.addEventListener('appinstalled', () => {
-            console.log('PWA wurde installiert');
-            deferredPrompt = null;
-            const installBanner = document.getElementById('installBanner');
-            if (installBanner) {
-                installBanner.style.display = 'none';
-            }
-        });
+      }
     </script>
-</body>
+  </body>
 </html>
